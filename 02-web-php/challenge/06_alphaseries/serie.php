@@ -1,3 +1,8 @@
+<?php
+require('fonctions.php');
+$show = details($shows);
+?>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -20,7 +25,7 @@
 <body>
     <!-- Barre de navigation -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="index.php">AlphaSeries</a>
+        <a class="navbar-brand" href="index.html">AlphaSeries</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -46,7 +51,7 @@
             </ul>
 
             <!-- Formulaire de recherche -->
-            <form action="recherche.php" method="post" class="form-inline my-2 my-lg-0">
+            <form action="recherche.html" method="post" class="form-inline my-2 my-lg-0">
                 <input name="search" class="form-control mr-sm-2" type="text" placeholder="Rechercher une série" aria-label="Rechercher une série">
                 <button class="btn btn-outline-info my-2 my-sm-0" type="submit">
                     <i class="fa fa-search"></i> <span class="d-md-none">Rechercher</span>
@@ -60,7 +65,7 @@
         <div class="jumbotron" style="position: relative">
             <div class="jumbotron-background" style="background-image: url('https://www.betaseries.com/images/fonds/banner/6786_1395440671.jpg');"></div>
             <div class="container">
-                <h1 class="display-3">Rick and Morty</h1>
+                <h1 class="display-3"><?= $show['name'] ?></h1>
             </div>
         </div>
 
@@ -70,7 +75,7 @@
 
                 <!-- Poster de la série -->
                 <div class="col-md-3 d-none d-md-block">
-                    <img src="https://www.betaseries.com/images/fonds/poster/275274.jpg" alt="Poster de Rick and Morty" class="img-thumbnail">
+                    <img src="<?= $show['images']['poster'] ?>" alt="" class="img-thumbnail">
                 </div>
 
                 <!-- Fiche série -->
@@ -78,7 +83,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">
-                                Rick and Morty
+                                <?= $show['name'] ?>
 
                                 <!-- Affichage de la note avec le bon nombre d'étoiles et un tooltip -->
                                 <span class="stars text-info" data-toggle="tooltip" data-placement="top" title="4.80">
@@ -89,22 +94,24 @@
                                     <i class="fa fa-star-half"></i>
                                 </span>
                             </h4>
-                            <h6 class="card-subtitle mb-2 text-muted">3 saisons, 38 épisodes</h6>
-                            <h5>
-                                16 867 personnes suivent la série
+                            <h6 class="card-subtitle mb-2 text-muted"><?= $show['statistics']['season_count'] ?> saisons, <?= $show['statistics']['episode_count'] ?> épisodes</h6>
+                                  <h5>
+                                 <?= number_format($show['statistics']['popularity'], 0, 3, ' ') ?> personnes suivent la série
                             </h5>
                             <p>
                                 <!-- Affichage des genres de la série -->
-                                <span class="badge badge-secondary">Adventure</span>
-                                <span class="badge badge-secondary">Animation</span>
-                                <span class="badge badge-secondary">Comedy</span>
-                                <small>sortie en 2013 chez Adult Swim</small>
+                                <?php
+                                  foreach ($show['genres'] as $genre) {
+                                      print '<span class="badge badge-secondary">' . $genre . '</span>';
+                                  }
+                                  ?>
+                                <small>sortie en <?= $show['release_year'] ?> chez <?= $show['network'] ?></small>
                             </p>
                             <p class="card-text">
-                                Rick, un vieil alcoolique déséquilibré et scientifique de génie, et Morty, son petit-fils qu'il entraîne dans des aventures extraordinaires, dangereuses, à travers l'espace et dans des univers parallêles. Rick a récemment renoué avec sa famille et vit désormais dans le garage de sa fille Beth, mettant jour après jour en péril la stabilité de la vie de Morty.
+                                 <?= $show['synopsis']; ?>
                             </p>
-                            <a target="_blank" href="https://www.betaseries.com/serie/rick-and-morty" class="card-link">
-                                <i class="fa fa-external-link-alt"></i>
+                            <a target="_blank" href="https://www.betaseries.com/serie/<?= $show['slug'] ?>" class="card-link">
+                            <i class="fa fa-external-link-alt"></i>
                                 Voir la fiche sur BetaSeries
                             </a>
                         </div>
@@ -118,7 +125,7 @@
                         </div>
                         <div class="embed-responsive embed-responsive-21by9">
                             <!-- Vidéo youtube, pensez à remplacer opRwgY7RDP0 par l'id youtube de la vidéo -->
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/opRwgY7RDP0?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/<?= $show['youtube_id'] ?>?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
