@@ -1,29 +1,4 @@
-<?php
-// création de la connexion
-$dsn = 'mysql:dbname=challenge_exo;host=127.0.0.1';
-$user = 'root';
-$password = '';
-$connection = new PDO($dsn, $user, $password);
 
-// ajouter un joueur
-if (isset($_POST['name'])) {
-    $statement = $connection->prepare("
-        INSERT INTO challenge_exo(name)
-        VALUES(:name)
-    ");
-
-    $statement->bindValue(':name', $_POST['name']);
-    $statement->execute();
-}
-// affichage de la liste
-$statement = $connection->prepare("
-    SELECT *
-    FROM challenge_exo
-    ORDER BY name ASC
-");
-$statement->execute();
-$products = $statement->fetchAll();
-?>
 <!doctype html>
 <html lang="fr">
   <head>
@@ -55,7 +30,7 @@ $products = $statement->fetchAll();
         </div>
       </header>
 
-      <!-- <main role="main" class="inner cover">
+      <main role="main" class="inner cover">
         <h1 class="cover-heading">Fais ton choix.</h1>
         <p class="lead">Tu as un choix très difficile à faire...</p>
         <p class="lead">
@@ -63,30 +38,7 @@ $products = $statement->fetchAll();
           <a href="commence-maintenant-2v2.php" class="btn btn-lg btn-secondary">2 vs 2</a>
         </p>
             <a href="index.php" type="button" class="btn btn-danger">Retour</a>
-      </main> -->
-
-     <form>
-        <div class="form-group">
-            <br>
-            <br>
-            <br>
-        <h1 class="cover-heading">Crée ton joueur.</h1>
-            <form action="creer-joueur.php" method="POST">
-              <label for="formGroupExampleInput">Entre le pseudo du joueur a créer.</label>
-              <input type="text" class="form-control" id="name" placeholder="Pseudo">
-        </div>
-            <p class="lead">
-              <!-- <a href="choix.php" class="btn btn-lg btn-secondary">Créer</a> -->
-              <button type="submit" class="btn btn-primary">Créer</button>
-            </p>
-    </form>
-            <h1 class="cover-heading">Tu as déjà créé ton joueur ?</h1>
-                <p class="lead">
-                  <a href="choix.php" class="btn btn-lg btn-secondary">Continue</a>
-                </p>
-                    <a href="index.php" type="button" class="btn btn-danger">Retour</a>
-
-  </form>
+      </main>
 
       <footer class="mastfoot mt-auto">
         <div class="inner">
