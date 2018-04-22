@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
+          <embed src="hymne.mp3" autostart="true" loop="false" hidden="true"></embed>
 
     <title>Baby Squad</title>
 
@@ -24,8 +25,9 @@
           <h3 class="masthead-brand">Baby Squad</h3>
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link active" href="index.php">Accueil</a>
-            <a class="nav-link" href="creer-joueur.php">Créer un joueur</a>
-            <a class="nav-link" href="choix.php">Commence maintenant</a>
+            <!-- <a class="nav-link" href="creer-joueur.php">Créer un joueur</a> -->
+            <a class="nav-link" href="creer-teams.php">Commence maintenant</a>
+            <a class="nav-link" href="classement.php">Classement</a>
             <a class="nav-link" href="contact.php">Contact</a>
           </nav>
         </div>
@@ -35,7 +37,7 @@
         <h1 class="cover-heading">Baby Squad.</h1>
         <p class="lead">Baby Squad est une révolution dans le domaine du baby-foot. Crée et gère tes parties directement en ligne gratuitement.</p>
         <p class="lead">
-          <a href="choix.php" class="btn btn-lg btn-secondary">Commence maintenant !</a>
+          <a href="creer-teams.php" class="btn btn-lg btn-secondary">Commence maintenant !</a>
         </p>
       </main>
 

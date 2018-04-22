@@ -1,3 +1,14 @@
+<?php
+// création de la connexion
+$dsn = 'mysql:dbname=projet_php;host=127.0.0.1';
+$user = 'root';
+$password = '';
+// $connection = new PDO($dsn, $user, $password);
+$connection = new PDO($dsn, $user, $password, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+]);
+
+?>
 
 <!doctype html>
 <html lang="fr">
@@ -24,8 +35,9 @@
           <h3 class="masthead-brand">Baby Squad</h3>
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link" href="index.php">Accueil</a>
-            <a class="nav-link" href="creer-joueur.php">Créer un joueur</a>
-            <a class="nav-link active" href="commence-maintenant.php">Commence maintenant</a>
+            <!-- <a class="nav-link" href="creer-joueur.php">Créer un joueur</a> -->
+            <a class="nav-link active" href="choix.php">Commence maintenant</a>
+            <a class="nav-link" href="classement.php">Classement</a>
             <a class="nav-link" href="contact.php">Contact</a>
           </nav>
         </div>
@@ -33,21 +45,82 @@
 
       <main role="main" class="inner cover">
         <h1 class="cover-heading">2 vs 2.</h1>
-        <p class="lead">Pour commencer c'est très simple. Rentre les informations des joueurs ci-dessous et crée le classement !</p>
+        <p class="lead">Pour commencer c'est très simple. Rentre les informations des équipes ci-dessous et crée le classement !</p>
       </main>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
       <form>
 
           <form>
             <div class="form-group">
-              <label for="formGroupExampleInput">Pseudo du joueur 1</label>
-              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Rentre le pseudo du premier joueur">
-            </div>
-            <div class="form-group">
-              <label for="formGroupExampleInput2">Pseudo du joueur 2</label>
-              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Rentrer le pseudo du deuxième joueur">
+                <!-- <br>
+                <br>
+                <br>
+            <h1 class="cover-heading">Première étape.</h1>
+              <label for="formGroupExampleInput">Crée ton joueur</label>
+              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Rentre le pseudo du joueur a créer">
             </div>
           </form>
-          <button type="button" class="btn btn-primary">Ajouter !</button>
+          <button type="button" class="btn btn-primary">Créer !</button>
+              <br>
+              <br>
+              <br> -->
+          <h1 class="cover-heading">Score du match.</h1>
+            <label for="formGroupExampleInput">Quel résultat ? Choisi ton équipe ci-dessous</label>
+          <select class="form-control" name="name">
+              <!-- <option>Sélectionne ton joueur</option> -->
+              <?php
+                    $base = mysqli_connect('localhost','root','','projet_php');
+                    $sq = 'SELECT nom FROM equipe';
+                    $re = mysqli_query($base,$sq) or die ('Erreur SQL !'.$sql.'<br/>'.mysqli_error($base));
+                    while($ligne=mysqli_fetch_row($re)) {
+                        echo '<option>'.$ligne[0].'</option>';
+                    }
+                ?>
+        </select>
+
+        <div class="form-check">
+
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Victoire
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+            <label class="form-check-label" for="defaultCheck2">
+              Défaite
+            </label>
+      </div>
+
+        <label for="formGroupExampleInput">Contre quel équipe tu-as joué ?</label>
+      <select class="form-control" name="name">
+          <!-- <option>Sélectionne ton joueur</option> -->
+          <?php
+                $base = mysqli_connect('localhost','root','','projet_php');
+                $sq = 'SELECT nom FROM equipe';
+                $re = mysqli_query($base,$sq) or die ('Erreur SQL !'.$sql.'<br/>'.mysqli_error($base));
+                while($ligne=mysqli_fetch_row($re)) {
+                    echo '<option>'.$ligne[0].'</option>';
+                }
+            ?>
+    </select>
+          <div class="form-check">
+
+              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+              <label class="form-check-label" for="defaultCheck1">
+                Victoire
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+              <label class="form-check-label" for="defaultCheck2">
+                Défaite
+              </label>
+        </div>
 
       <footer class="mastfoot mt-auto">
         <div class="inner">

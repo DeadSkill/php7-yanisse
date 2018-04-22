@@ -24,8 +24,8 @@
           <h3 class="masthead-brand">Baby Squad</h3>
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link" href="index.php">Accueil</a>
-            <a class="nav-link" href="creer-joueur.php">Créer un joueur</a>
-            <a class="nav-link" href="commence-maintenant.php">Commence maintenant</a>
+            <a class="nav-link" href="creer-teams.php">Commence maintenant</a>
+            <a class="nav-link" href="classement.php">Classement</a>
             <a class="nav-link active" href="contact.php">Contact</a>
           </nav>
         </div>

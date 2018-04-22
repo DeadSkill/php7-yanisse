@@ -34,8 +34,8 @@
         <h1 class="cover-heading">Fais ton choix.</h1>
         <p class="lead">Tu as un choix très difficile à faire...</p>
         <p class="lead">
-          <a href="commence-maintenant-1v1.php" class="btn btn-lg btn-secondary">1 vs 1</a>
-          <a href="commence-maintenant-2v2.php" class="btn btn-lg btn-secondary">2 vs 2</a>
+          <a href="creer-teams.php" class="btn btn-lg btn-secondary">1 vs 1</a>
+          <a href="creer-teams.php" class="btn btn-lg btn-secondary">2 vs 2</a>
         </p>
             <a href="index.php" type="button" class="btn btn-danger">Retour</a>
       </main>

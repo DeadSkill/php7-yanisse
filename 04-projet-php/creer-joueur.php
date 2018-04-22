@@ -1,28 +1,25 @@
 <?php
 // création de la connexion
-$dsn = 'mysql:dbname=challenge_exo;host=127.0.0.1';
+$dsn = 'mysql:dbname=projet_php;host=127.0.0.1';
 $user = 'root';
 $password = '';
-$connection = new PDO($dsn, $user, $password);
+// $connection = new PDO($dsn, $user, $password);
+$connection = new PDO($dsn, $user, $password, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+]);
 
 // ajouter un joueur
-if (isset($_POST['name'])) {
+if (isset($_POST['name']) && isset($_POST['team'])) {
     $statement = $connection->prepare("
-        INSERT INTO challenge_exo(name)
-        VALUES(:name)
+        INSERT INTO joueur(nom, idEquipe)
+        VALUES(:nom, :idEquipe)
     ");
 
-    $statement->bindValue(':name', $_POST['name']);
+    $statement->bindValue(':nom', $_POST['name']);
+    $statement->bindValue(':idEquipe', $_POST['team']);
     $statement->execute();
 }
-// affichage de la liste
-$statement = $connection->prepare("
-    SELECT *
-    FROM challenge_exo
-    ORDER BY name ASC
-");
-$statement->execute();
-$products = $statement->fetchAll();
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -65,26 +62,38 @@ $products = $statement->fetchAll();
             <a href="index.php" type="button" class="btn btn-danger">Retour</a>
       </main> -->
 
-     <form>
+    <form action="creer-joueur.php" method="POST">
         <div class="form-group">
             <br>
             <br>
             <br>
         <h1 class="cover-heading">Crée ton joueur.</h1>
-            <form action="creer-joueur.php" method="POST">
               <label for="formGroupExampleInput">Entre le pseudo du joueur a créer.</label>
-              <input type="text" class="form-control" id="name" placeholder="Pseudo">
+              <input type="text" class="form-control" name="name" placeholder="Pseudo">
         </div>
+        <label for="formGroupExampleInput">Dans quelle équipe tu veux l'insérer ?</label>
+        <select class="form-control" name="team">
+            <!-- <option>Sélectionne ton joueur</option> -->
+            <?php
+            $base = mysqli_connect('localhost','root','','projet_php');
+            $sq = 'SELECT * FROM equipe';
+            $re = mysqli_query($base,$sq) or die ('Erreur SQL !'.$sql.'<br/>'.mysqli_error($base));
+            while($ligne=mysqli_fetch_row($re)) {
+                echo '<option value="'.$ligne[0].'">'.$ligne[1].'</option>';
+            }
+            ?>
+        </select>
+        <br>
             <p class="lead">
               <!-- <a href="choix.php" class="btn btn-lg btn-secondary">Créer</a> -->
-              <button type="submit" class="btn btn-primary">Créer</button>
+              <button type="submit" class="btn btn-primary" onclick="alert('Joueur créé avec succès! Tu peux continuer :)');">Créer</button>
             </p>
-    </form>
-            <h1 class="cover-heading">Tu as déjà créé ton joueur ?</h1>
+
+            <h1 class="cover-heading">Tu as déjà créé tes joueurs ?</h1>
                 <p class="lead">
-                  <a href="choix.php" class="btn btn-lg btn-secondary">Continue</a>
+                  <a href="commence-maintenant-1v1.php" class="btn btn-lg btn-secondary">Continue</a>
                 </p>
-                    <a href="index.php" type="button" class="btn btn-danger">Retour</a>
+                    <a href="choix.php" type="button" class="btn btn-danger">Retour</a>
 
   </form>
 
@@ -94,6 +103,7 @@ $products = $statement->fetchAll();
         </div>
       </footer>
     </div>
+
 
 
     <!-- Bootstrap core JavaScript
