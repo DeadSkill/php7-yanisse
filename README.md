@@ -14,3 +14,12 @@ Troisième partie du cours sur l'objet PDO en PHP.
 
 ### 04-projet-php
 Projet PHP qui finalise le module PHP dans ce dépot.
+
+### Cours
+Tout les dépots de cours corrigés en classe.
+
+### Template html
+Template utilisée pour faire les projets web PHP (Bootstrap)
+
+### YmProno
+Projet personnel.
